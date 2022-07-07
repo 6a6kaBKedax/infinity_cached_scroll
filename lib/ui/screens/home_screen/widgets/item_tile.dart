@@ -6,11 +6,11 @@ class ItemTile extends StatefulWidget {
   const ItemTile({
     super.key,
     required this.url,
-    required this.title,
+    required this.index,
   });
 
   final String url;
-  final String title;
+  final int index;
 
   @override
   State<ItemTile> createState() => _ItemTileState();
@@ -30,19 +30,19 @@ class _ItemTileState extends State<ItemTile> {
             if (isCorrect) {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (BuildContext context) => DetailScreen(url: widget.url, title: widget.title),
+                  builder: (BuildContext context) => DetailScreen(url: widget.url, index: widget.index),
                 ),
               );
             }
           },
           child: Hero(
-            tag: widget.title,
+            tag: widget.index,
             ///Is used title in tag because it parameter unique
             ///Id was repeated
             child: Material(
               child: CachedNetworkImage(
                 imageUrl: widget.url,
-                cacheKey: widget.title,
+                cacheKey: widget.index.toString(),
                 errorWidget: (BuildContext context, _, __) {
                   setState(()=> isCorrect = false);
                   return const Icon(

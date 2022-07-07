@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return const BottomLoader(endOfStory: true);
                   } else {
                     return ItemTile(
-                      title: state.posts[index].title,
+                      index: index,
                       url: state.posts[index].url,
                     );
                   }
