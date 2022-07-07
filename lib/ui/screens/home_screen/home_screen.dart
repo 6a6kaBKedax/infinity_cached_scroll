@@ -39,8 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
               }
               return GridView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  if (index >= state.posts.length) {
-                    return BottomLoader(endOfStory: state.hasReachedMax);
+                  if (!state.hasReachedMax && index == state.posts.length) {
+                    return const BottomLoader(endOfStory: false);
+                  } else if (state.hasReachedMax && index == state.posts.length) {
+                    return const SizedBox();
+                  } else if (state.hasReachedMax && index >= state.posts.length) {
+                    return const BottomLoader(endOfStory: true);
                   } else {
                     return ItemTile(
                       title: state.posts[index].title,
@@ -48,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
                 },
-                itemCount: state.hasReachedMax ? state.posts.length : state.posts.length + 1,
+                itemCount: state.hasReachedMax ? state.posts.length + 2 : state.posts.length + 1,
                 controller: _scrollController,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
               );

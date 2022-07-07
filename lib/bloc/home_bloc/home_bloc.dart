@@ -18,7 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeInitEvent>(_init);
   }
 
-  static const int _postLimit = 20;
+  static const int _postLimit = 10;
 
   Future<void> _onRequest(HomeRequestEvent event, Emitter<HomeState> emit) async {
     if (state.hasReachedMax) {
@@ -26,7 +26,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
     try {
       final List<PhotoModel> posts = await Repository.client.getPhotos(state.posts.length, _postLimit);
-      if (posts.isEmpty || state.posts.length > 100) {
+      if (posts.isEmpty || state.posts.length > 110) {
         emit(HomeSuccessState(hasReachedMax: true, posts: state.posts));
       } else {
         emit(HomeSuccessState(posts: [...state.posts, ...posts], hasReachedMax: false));
@@ -39,7 +39,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<void> _init(HomeInitEvent event, Emitter<HomeState> emit) async {
     try {
-      final posts = await Repository.client.getPhotos(state.posts.length, _postLimit);
+      final posts = await Repository.client.getPhotos(state.posts.length, 24);
       return emit(HomeSuccessState(hasReachedMax: false, posts: posts));
     } on Exception catch (e) {
       logger.e(e);
