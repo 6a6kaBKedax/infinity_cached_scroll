@@ -6,11 +6,11 @@ class ItemTile extends StatelessWidget {
   const ItemTile({
     super.key,
     required this.url,
-    required this.id,
+    required this.title,
   });
 
   final String url;
-  final int id;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +22,18 @@ class ItemTile extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (BuildContext context) => DetailScreen(url: url, id: id),
+                builder: (BuildContext context) => DetailScreen(url: url, title: title),
               ),
             );
           },
           child: Hero(
-            tag: id,
+            tag: title,
+            ///Is used title in tag because it parameter unique
+            ///Id was repeated
             child: Material(
               child: CachedNetworkImage(
                 imageUrl: url,
-                cacheKey: id.toString(),
+                cacheKey: title,
                 errorWidget: (BuildContext context, _, __) {
                   return const Icon(
                     Icons.error_outline_rounded,

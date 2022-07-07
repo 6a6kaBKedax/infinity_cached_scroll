@@ -6,11 +6,11 @@ class DetailScreen extends StatelessWidget {
   const DetailScreen({
     Key? key,
     required this.url,
-    required this.id,
+    required this.title,
   }) : super(key: key);
 
   final String url;
-  final int id;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,11 @@ class DetailScreen extends StatelessWidget {
       ]),
       body: Center(
         child: Hero(
-          tag: id,
+          tag: title,
           child: Material(
             child: CachedNetworkImage(
               imageUrl: url,
-              cacheKey: id.toString(),
+              cacheKey: title,
               errorWidget: (BuildContext context, _, __) {
                 return const Icon(
                   Icons.error_outline_rounded,

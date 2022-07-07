@@ -23,7 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Grid on 100 elements 🧐'),
+      ),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           switch (state.runtimeType) {
@@ -41,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return BottomLoader(endOfStory: state.hasReachedMax);
                   } else {
                     return ItemTile(
-                      id: state.posts[index].id,
+                      title: state.posts[index].title,
                       url: state.posts[index].url,
                     );
                   }
