@@ -39,9 +39,12 @@ class ItemTile extends StatelessWidget {
                   );
                 },
                 progressIndicatorBuilder: (BuildContext context, _, DownloadProgress download) {
-                  return CircularProgressIndicator.adaptive(
-                    value: download.progress,
-                    strokeWidth: 1.5,
+                  return Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: CircularProgressIndicator.adaptive(
+                      value: download.progress,
+                      strokeWidth: 1.5,
+                    ),
                   );
                 },
               ),

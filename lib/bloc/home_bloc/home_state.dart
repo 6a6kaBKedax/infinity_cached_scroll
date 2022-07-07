@@ -14,10 +14,7 @@ class HomeInitial extends HomeState {
   const HomeInitial() : super(hasReachedMax: false, posts: const []);
 
   @override
-  List<Object?> get props => [
-        [...posts],
-        hasReachedMax
-      ];
+  List<Object?> get props => [posts, hasReachedMax];
 }
 
 class HomeSuccessState extends HomeState {
@@ -27,10 +24,7 @@ class HomeSuccessState extends HomeState {
   }) : super(hasReachedMax: hasReachedMax, posts: posts);
 
   @override
-  List<Object?> get props => [
-        [...posts],
-        hasReachedMax
-      ];
+  List<Object?> get props => [posts, hasReachedMax];
 }
 
 class HomeErrorState extends HomeState {
@@ -39,8 +33,5 @@ class HomeErrorState extends HomeState {
   }) : super(hasReachedMax: true, posts: posts);
 
   @override
-  List<Object?> get props => [
-        [...posts],
-        hasReachedMax
-      ];
+  List<Object?> get props => [posts, hasReachedMax];
 }

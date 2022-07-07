@@ -14,7 +14,7 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeInitial()) {
-    on<HomeRequestEvent>(_onRequest, transformer: throttleDroppable());
+    on<HomeRequestEvent>(_onRequest);
     on<HomeInitEvent>(_init);
   }
 
@@ -27,9 +27,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       final List<PhotoModel> posts = await Repository.client.getPhotos(state.posts.length, _postLimit);
       if (posts.isEmpty || state.posts.length > 100) {
-        HomeSuccessState(hasReachedMax: true, posts: state.posts);
+        emit(HomeSuccessState(hasReachedMax: true, posts: state.posts));
       } else {
-        HomeSuccessState(posts: [...state.posts, ...posts], hasReachedMax: false);
+        emit(HomeSuccessState(posts: [...state.posts, ...posts], hasReachedMax: false));
       }
     } catch (e) {
       logger.e(e);
@@ -45,11 +45,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       logger.e(e);
       emit(HomeErrorState(posts: state.posts));
     }
-  }
-
-  EventTransformer<E> throttleDroppable<E>() {
-    return (events, mapper) {
-      return droppable<E>().call(events.throttle(const Duration(milliseconds: 100)), mapper);
-    };
   }
 }
