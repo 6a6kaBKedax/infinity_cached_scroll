@@ -19,13 +19,15 @@ dependencies:
   retrofit: ^3.0.1+1
   logger: ^1.1.0
   json_serializable: ^6.2.0
+  bloc_concurrency: ^0.2.0
+  cached_network_image: ^3.2.1
+  share_plus: ^4.0.10
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   retrofit_generator: ^4.0.1
   build_runner: ^2.1.11
-  
   flutter_lints: ^2.0.0
 
 flutter:

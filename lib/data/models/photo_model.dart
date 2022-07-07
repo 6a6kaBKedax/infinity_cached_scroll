@@ -12,12 +12,13 @@ class PhotoModel {
     required this.thumbnailUrl,
   });
 
-  final String albumId;
-  final String id;
+  final int albumId;
+  final int id;
   final String title;
   final String url;
   final String thumbnailUrl;
 
   factory PhotoModel.fromJson(Map<String, dynamic> json) => _$PhotoModelFromJson(json);
+
   Map<String, dynamic> toJson() => _$PhotoModelToJson(this);
 }

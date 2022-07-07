@@ -7,8 +7,8 @@ part of 'photo_model.dart';
 // **************************************************************************
 
 PhotoModel _$PhotoModelFromJson(Map<String, dynamic> json) => PhotoModel(
-      albumId: json['albumId'] as String,
-      id: json['id'] as String,
+      albumId: json['albumId'] as int,
+      id: json['id'] as int,
       title: json['title'] as String,
       url: json['url'] as String,
       thumbnailUrl: json['thumbnailUrl'] as String,
